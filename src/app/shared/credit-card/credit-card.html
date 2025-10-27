@@ -1,0 +1,26 @@
+<div class="bg-primary text-white p-4 rounded-lg relative min-2-[300px] z-0">
+  <div class="aboslute top-6 right-6">
+    <img
+      [src]="brand"
+      [alt]="'Bandeira do cartão' + 'name'"
+      class="w-[50px] h-[50px]"
+    />
+  </div>
+
+  <div class="mt-12">
+    <div class="flex flex-row mb-2">
+      <i-tabler
+        name="device-sd-card"
+        class="rotate-90"
+        fill="'#ccc'"
+        size="40"
+      />
+      <i-tabler name="wifi-2" class="rotate-90" size="40" />
+    </div>
+  </div>
+
+  <div class="flex flex-row items-center">
+    <img [src]="logo" [alt]="'Logo do banco' + name" class="w-10 h-10" />
+    <span class="ml-4 text-base font-medium">{{ name }}</span>
+  </div>
+</div>

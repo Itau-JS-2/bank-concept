@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@plugin "daisyui";
+
+@source inline("bg-red-500");
+@source inline("bg-green-500");
+@source inline("bg-blue-500");
+@source inline("bg-yellow-500");
+
+@plugin "daisyui" {
+  themes: light --prefersdark --default;
+}
+
+@theme inline {
+  --color-primary: #ff6200;
+  --color-secondary: #f35d00;
+  --color-tertiary: #ff7d45;
+  --color-text: #191919;
+  --color-text-contrast: #fff;
+  --color-bg: #ffffff;
+  --color-contrast: #f5f5f5;
+  --color-white: #fff;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+
+  @apply bg-bg text-text;
+}
+
+input {
+  @apply w-full border-2 border-primary text-primary rounded-full placeholder:text-primary;
+}
+
+select {
+  @apply select rounded-full border-primary border-2 text-primary;
+}
