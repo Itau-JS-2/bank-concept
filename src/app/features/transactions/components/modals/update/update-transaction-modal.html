@@ -1,0 +1,13 @@
+<ng-template #actionsTemplate>
+  <i-tabler name="trash" class="cursor-pointer btn-circle" (click)="delete()" />
+</ng-template>
+
+<app-modal
+  title="Transação"
+  [name]="modalName"
+  [actionsTemplate]="actionsTemplate"
+>
+  @if (transaction$ | async; as transaction) {
+  <div>{{ transaction.name }}</div>
+  }
+</app-modal>

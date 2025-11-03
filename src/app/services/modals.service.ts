@@ -9,10 +9,10 @@ export type ModalProps = {
 };
 
 export enum ModalName {
-  CREATE_TRANSACTION,
-  UPDATE_TRANSACTION,
-  CREATE_CATEGORY,
-  UPDATE_CATEGORY,
+  CREATE_TRANSACTION = 'create-transaction',
+  UPDATE_TRANSACTION = 'update-transaction',
+  CREATE_CATEGORY = 'create-category',
+  UPDATE_CATEGORY = 'update-category',
 }
 
 const DEFAULT_MODALS: ModalProps[] = [
