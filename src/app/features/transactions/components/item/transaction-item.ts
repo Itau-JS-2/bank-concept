@@ -9,6 +9,7 @@ import {
 } from 'angular-tabler-icons/icons';
 import { BehaviorSubject, combineLatest, filter, map, Observable } from 'rxjs';
 import { ModalName, ModalsService } from '../../../../services/modals.service';
+import { FormatDatePipe } from '../../../../shared/utils/format-date.pipe';
 import {
   CategoriesService,
   CategoryType,

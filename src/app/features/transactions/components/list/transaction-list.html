@@ -1,0 +1,22 @@
+<div>
+  <div class="flex items-center justify-between mb-5">
+    <h3 class="font-bold text-xl">Transações</h3>
+    <app-create-transaction-button />
+  </div>
+
+  @if (transactions$ | async; as transactions) {
+  <ul
+    class="relative flex flex-col gap-5 w-full before:absolute before:content-[''] before:left-[19px] before:my-4 before:h-[calc(100%-32px)] before:max-h-full before:w-0.5 before:bg-gray-200"
+  >
+    @for(transaction of transactions; track transaction.id) {
+    <li class="cursor-pointer">
+      <app-transaction-item [data]="transaction" />
+    </li>
+    } @empty {
+    <div class="text-center py-6 text-gray-500 w-full">
+      Nenhuma ação registrada.
+    </div>
+    }
+  </ul>
+  }
+</div>
