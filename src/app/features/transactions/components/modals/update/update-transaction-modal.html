@@ -8,6 +8,9 @@
   [actionsTemplate]="actionsTemplate"
 >
   @if (transaction$ | async; as transaction) {
-  <div>{{ transaction.name }}</div>
+  <app-default-transaction-form
+    [defaultValues]="transaction"
+    (submitForm)="onSubmit($event)"
+  />
   }
 </app-modal>

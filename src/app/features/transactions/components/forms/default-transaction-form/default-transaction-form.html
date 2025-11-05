@@ -1,0 +1,81 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+  <div>
+    <label class="block mb-1 text-sm" for="input-name">Nome</label>
+    <input
+      id="input-name"
+      type="text"
+      formControlName="name"
+      class="w-full border rounded px-3 py-2"
+    />
+    @if(form.get('name')?.invalid && form.get('name')?.touched) {
+    <div class="text-red-500 text-sm">Nome obrigatório</div>
+    }
+  </div>
+
+  <div>
+    <label class="block mb-1 text-sm" for="input-value">Valor</label>
+    <input
+      id="input-value"
+      type="number"
+      formControlName="value"
+      class="w-full border rounded px-3 py-2"
+    />
+    @if (form.get('value')?.invalid && form.get('value')?.touched) {
+    <div class="text-red-500 text-sm">Valor obrigatório</div>
+    }
+  </div>
+
+  <div class="flex gap-4">
+    <div class="w-1/2">
+      <label class="block mb-1 text-sm" for="select-category">Categoria</label>
+      <select
+        id="select-category"
+        class="w-full border rounded px-3 py-2"
+        formControlName="categoryId"
+      >
+        <option [ngValue]="null">Selecione</option>
+
+        @for (c of categories$ | async; track c.id) {
+        <option [ngValue]="c.id">{{ c.name }}</option>
+        }
+      </select>
+      @if(form.get('categoryId')?.invalid && form.get('categoryId')?.touched) {
+      <div class="text-red-500 text-sm">Categoria obrigatória</div>
+      }
+    </div>
+
+    <div class="w-1/2">
+      <label class="block mb-1 text-sm" for="select-payment-method">Tipo</label>
+      <select
+        id="select-payment-method"
+        class="w-full border rounded px-3 py-2"
+        formControlName="paymentType"
+      >
+        <option [value]="null">Selecione</option>
+
+        @for(p of paymentMethods; track p.name) {
+        <option [value]="p.value">{{ p.name }}</option>
+        }
+      </select>
+      @if(form.get('paymentType')?.invalid && form.get('paymentType')?.touched)
+      {
+      <div class="text-red-500 text-sm">Tipo obrigatório</div>
+      }
+    </div>
+  </div>
+
+  <div>
+    <label class="block mb-1 text-sm" for="input-date">Data</label>
+    <input
+      id="input-date"
+      type="date"
+      formControlName="date"
+      class="w-full border rounded px-3 py-2"
+    />
+    @if (form.get('date')?.invalid && form.get('date')?.touched) {
+    <div class="text-red-500 text-sm">Data obrigatória</div>
+    }
+  </div>
+
+  <app-button className="w-full" type="submit">Salvar</app-button>
+</form>

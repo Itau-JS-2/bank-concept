@@ -3,5 +3,5 @@
   [name]="modalName"
   id="create-transaction-modal"
 >
-  <div>Formulário da transação</div>
+  <app-default-transaction-form (submitForm)="onSubmit($event)" />
 </app-modal>

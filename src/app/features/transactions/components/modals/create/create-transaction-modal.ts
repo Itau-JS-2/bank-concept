@@ -10,11 +10,12 @@ import {
   TransactionFormType,
   TransactionsService,
 } from '../../../services/transactions.service';
+import { DefaultTransactionFormComponent } from '../../forms/default-transaction-form/default-transaction-form';
 
 @Component({
   selector: 'app-create-transaction-modal',
   standalone: true,
-  imports: [CommonModule, ModalsComponent],
+  imports: [CommonModule, ModalsComponent, DefaultTransactionFormComponent],
   templateUrl: './create-transaction-modal.html',
 })
 export class CreateTransactionModalComponent {

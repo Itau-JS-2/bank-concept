@@ -14,11 +14,17 @@ import {
   TransactionsService,
   TransactionType,
 } from '../../../services/transactions.service';
+import { DefaultTransactionFormComponent } from '../../forms/default-transaction-form/default-transaction-form';
 
 @Component({
   selector: 'app-update-transaction-modal',
   standalone: true,
-  imports: [TablerIconComponent, CommonModule, ModalsComponent],
+  imports: [
+    TablerIconComponent,
+    CommonModule,
+    ModalsComponent,
+    DefaultTransactionFormComponent,
+  ],
   providers: [
     provideTablerIcons({
       IconTrash,
@@ -64,6 +70,7 @@ export class UpdateTransactionModalComponent implements OnDestroy {
 
   onSubmit(data: TransactionFormType): void {
     if (this.currentDataId) {
+      console.log('form', data);
       this.transactionService.update(
         {
           ...data,
@@ -72,6 +79,8 @@ export class UpdateTransactionModalComponent implements OnDestroy {
         },
         this.currentDataId
       );
+
+      this.modalsService.close(this.modalName);
     }
   }
 

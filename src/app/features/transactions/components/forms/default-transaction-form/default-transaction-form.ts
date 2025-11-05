@@ -9,9 +9,11 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -47,16 +49,31 @@ export class DefaultTransactionFormComponent implements OnInit, OnChanges {
     this.categories$ = this.categoriesService.categories$;
     const initialValues = this.defaultValues();
 
-    this.form = this.fb.group({
-      name: [initialValues?.name || '', Validators.required],
-      value: [initialValues?.value || null, Validators.min(0.01)],
-      categoryId: [initialValues?.categoryId || null, Validators.required],
-      paymentType: [initialValues?.paymentType || null, Validators.required],
-      date: [this.formatDate(initialValues?.date), Validators.required],
-    });
+    this.form = this.fb.group(
+      {
+        name: [initialValues?.name || '', Validators.required],
+        value: [initialValues?.value || null, Validators.min(0.01)],
+        categoryId: [initialValues?.categoryId, Validators.required],
+        paymentType: [initialValues?.paymentType || null, Validators.required],
+        date: [this.formatDate(initialValues?.date), Validators.required],
+      },
+      { updateOn: 'blur' }
+    );
   }
+
+  private requiredSelection(control: AbstractControl): ValidationErrors | null {
+    console.log(control.value, typeof control.value);
+    if (control.value === null || control.value === 0) {
+      return { requiredSelection: true };
+    }
+    return null;
+  }
+
+  private categoryIdRequiredValidor(control: { value: string }) {
+    return control.value === null || control.value === undefined ? true : false;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes['defaultValues'] && this.form) {
       const v = this.defaultValues();
 
@@ -81,9 +98,21 @@ export class DefaultTransactionFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    if (this.form.invalid) {
+      return;
+    }
 
+    console.log(this.form.value);
     this.submitForm.emit(this.form.value);
     this.form.reset();
   }
 }
+
+/* export function forbiddenNameValidator(
+  categoryId: TransactionType['categoryId']
+): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const forbidden = categoryId.test(control.value);
+    return forbidden ? { forbiddenName: { value: control.value } } : null;
+  };
+} */
