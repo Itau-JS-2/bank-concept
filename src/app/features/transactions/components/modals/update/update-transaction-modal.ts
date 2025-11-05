@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
-import { TablerIconComponent } from 'angular-tabler-icons';
+import { provideTablerIcons, TablerIconComponent } from 'angular-tabler-icons';
+import { IconTrash } from 'angular-tabler-icons/icons';
 import { map, Observable, Subscription, switchMap } from 'rxjs';
 import {
   ModalName,
@@ -18,6 +19,11 @@ import {
   selector: 'app-update-transaction-modal',
   standalone: true,
   imports: [TablerIconComponent, CommonModule, ModalsComponent],
+  providers: [
+    provideTablerIcons({
+      IconTrash,
+    }),
+  ],
   templateUrl: './update-transaction-modal.html',
 })
 export class UpdateTransactionModalComponent implements OnDestroy {
